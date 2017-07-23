@@ -1,0 +1,28 @@
+#include "stdafx.h"  
+#include <Windows.h>     
+#include <iostream>      
+#include <string>   
+#include <io.h>  
+#include <direct.h>  
+using namespace std;       
+  
+    
+int _tmain(int argc, _TCHAR* argv[])  
+{   
+    char *fileName="123\\1\\2\\3\\a.txt",*tag;  
+    for(tag=fileName;*tag;tag++)  
+    {  
+        if (*tag=='\\')  
+        {  
+            char buf[1000],path[1000];  
+            strcpy(buf,fileName);  
+            buf[strlen(fileName)-strlen(tag)+1]=NULL;  
+            strcpy(path,buf);  
+            if (access(path,6)==-1)  
+            {  
+                mkdir(path);  //创建成功返回0 不成功返回-1  
+            }  
+        }  
+    }  
+    return 0;  
+}  
